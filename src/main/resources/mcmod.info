@@ -1,0 +1,15 @@
+[
+{
+  "modid": "foodaddition",
+  "name": "Food Addition",
+  "description": "Adds mutton/horse/calamari food for 1.7.10",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/food-addition",
+  "updateUrl": "",
+  "authorList": ["awesomehippo"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
