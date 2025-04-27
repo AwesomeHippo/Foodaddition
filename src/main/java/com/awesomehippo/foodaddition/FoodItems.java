@@ -17,33 +17,27 @@ public class FoodItems {
     public static void initialize() {
         rawMutton = new ItemFood(2, 0.3F, true)
                 .setUnlocalizedName("foodaddition.rawMutton")
-                .setTextureName("foodaddition:raw_mutton")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:raw_mutton");
 
         cookedMutton = new ItemFood(6, 0.783F, true)
                 .setUnlocalizedName("foodaddition.cookedMutton")
-                .setTextureName("foodaddition:cooked_mutton")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:cooked_mutton");
 
         rawHorse = new ItemFood(2, 0.3F, true)
                 .setUnlocalizedName("foodaddition.rawHorse")
-                .setTextureName("foodaddition:raw_horse")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:raw_horse");
 
         cookedHorse = new ItemFood(9, 0.6F, true)
                 .setUnlocalizedName("foodaddition.cookedHorse")
-                .setTextureName("foodaddition:cooked_horse")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:cooked_horse");
 
         rawCalamari = new ItemFood(2, 0.3F, true)
                 .setUnlocalizedName("foodaddition.rawCalamari")
-                .setTextureName("foodaddition:raw_calamari")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:raw_calamari");
 
         cookedCalamari = new ItemFood(3, 0.783F, true)
                 .setUnlocalizedName("foodaddition.cookedCalamari")
-                .setTextureName("foodaddition:cooked_calamari")
-                .setCreativeTab(CreativeTabs.tabFood);
+                .setTextureName("foodaddition:cooked_calamari");
 
         GameRegistry.registerItem(rawMutton, "rawMutton");
         GameRegistry.registerItem(cookedMutton, "cookedMutton");
