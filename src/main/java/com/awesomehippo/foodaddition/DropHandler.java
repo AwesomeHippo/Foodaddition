@@ -15,7 +15,7 @@ public class DropHandler {
     private static final Random random = new Random();
 
     /**
-     * Contructor of the class - will only put the right keys and values in the Item's Maps
+     * Contructor of the class - will only put the right keys and values in the Maps
      */
     public DropHandler(){
         rawDropMap.put("Sheep", FoodItems.rawMutton);
@@ -33,7 +33,7 @@ public class DropHandler {
      */
     @SubscribeEvent
     public void onEntityDrops(LivingDropsEvent event) {
-        genTotalDrops(event.lootingLevel);
+        genTotalDrops(event);
         event.entityLiving.entityDropItem(getDrops(event.entityLiving), 0.0F);
     }
 
@@ -49,11 +49,10 @@ public class DropHandler {
     }
 
     /**
-     * Calculate the number of items dropped by the mob killed
-     * @param looting The looting level of the player's weapon
+     * Calculate the number of items dropped by the mob killed.
      */
-    private void genTotalDrops(int looting) {
-        this.totalDrops = random.nextInt(2) + 1 + (looting > 0 ? random.nextInt(looting + 1) : 0);
-
+    private void genTotalDrops(LivingDropsEvent event) {
+        this.totalDrops = event.entityLiving.isChild()
+                ? 0 : random.nextInt(2) + 1 + (event.lootingLevel > 0 ? random.nextInt(event.lootingLevel) + 1 : 0);
     }
 }
