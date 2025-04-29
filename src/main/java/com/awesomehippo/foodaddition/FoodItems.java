@@ -15,7 +15,11 @@ public class FoodItems {
     public static Item rawWolf;
     public static Item cookedWolf;
 
-    public static void initialize() {
+    public FoodItems() {
+        this.initialize();
+    }
+
+    private void initialize() {
         rawMutton = new ItemFood(2, 0.3F, true)
                 .setUnlocalizedName("foodaddition.rawMutton")
                 .setTextureName("foodaddition:raw_mutton");

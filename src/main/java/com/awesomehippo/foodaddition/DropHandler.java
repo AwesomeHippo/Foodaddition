@@ -12,7 +12,7 @@ import java.util.Random;
 public class DropHandler {
     private int totalDrops;
     private final HashMap<String, Item> rawDropMap = new HashMap<>(), cookedDropMap = new HashMap<>();
-    private static final Random random = new Random();
+    private final Random random = new Random();
 
     /**
      * Contructor of the class - will only put the right keys and values in the Maps
