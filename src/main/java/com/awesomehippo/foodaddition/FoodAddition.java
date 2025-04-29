@@ -1,5 +1,7 @@
 package com.awesomehippo.foodaddition;
 
+import com.awesomehippo.foodaddition.integrations.ThaumcraftCompat;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -12,5 +14,7 @@ public class FoodAddition {
     public void initialize(FMLInitializationEvent event) {
         new FoodItems();
         MinecraftForge.EVENT_BUS.register(new DropHandler());
+        // Loading integrations
+        if (Loader.isModLoaded("Thaumcraft")) new ThaumcraftCompat();
     }
 }
