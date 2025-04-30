@@ -1,11 +1,11 @@
-package com.awesomehippo.foodaddition;
+package com.awesomehippo.foodaddition.config;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class FoodItems {
+public class ConfigItems {
     public static Item rawMutton;
     public static Item cookedMutton;
     public static Item rawHorse;
@@ -15,11 +15,7 @@ public class FoodItems {
     public static Item rawWolf;
     public static Item cookedWolf;
 
-    public FoodItems() {
-        this.initialize();
-    }
-
-    private void initialize() {
+    public static void init() {
         rawMutton = new ItemFood(2, 0.3F, true)
                 .setUnlocalizedName("foodaddition.rawMutton")
                 .setTextureName("foodaddition:raw_mutton");

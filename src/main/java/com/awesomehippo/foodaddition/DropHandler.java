@@ -1,5 +1,6 @@
 package com.awesomehippo.foodaddition;
 
+import com.awesomehippo.foodaddition.config.ConfigItems;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -17,15 +18,15 @@ public class DropHandler {
     /**
      * Contructor of the class - will only put the right keys and values in the Maps
      */
-    public DropHandler(){
-        rawDropMap.put("Sheep", FoodItems.rawMutton);
-        rawDropMap.put("Horse", FoodItems.rawHorse);
-        rawDropMap.put("Squid", FoodItems.rawCalamari);
-        rawDropMap.put("Wolf", FoodItems.rawWolf);
-        cookedDropMap.put("Sheep", FoodItems.cookedMutton);
-        cookedDropMap.put("Horse", FoodItems.cookedHorse);
-        cookedDropMap.put("Squid", FoodItems.cookedCalamari);
-        cookedDropMap.put("Wolf", FoodItems.cookedWolf);
+    public DropHandler() {
+        rawDropMap.put("Sheep", ConfigItems.rawMutton);
+        rawDropMap.put("Horse", ConfigItems.rawHorse);
+        rawDropMap.put("Squid", ConfigItems.rawCalamari);
+        rawDropMap.put("Wolf", ConfigItems.rawWolf);
+        cookedDropMap.put("Sheep", ConfigItems.cookedMutton);
+        cookedDropMap.put("Horse", ConfigItems.cookedHorse);
+        cookedDropMap.put("Squid", ConfigItems.cookedCalamari);
+        cookedDropMap.put("Wolf", ConfigItems.cookedWolf);
     }
 
     /**
