@@ -1,33 +1,17 @@
-package com.awesomehippo.foodaddition;
+package foodaddition;
 
-import com.awesomehippo.foodaddition.config.ConfigItems;
+import foodaddition.config.ConfigItems;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class DropHandler {
     private int totalDrops;
-    private final HashMap<String, Item> rawDropMap = new HashMap<>(), cookedDropMap = new HashMap<>();
     private final Random random = new Random();
-
-    /**
-     * Contructor of the class - will only put the right keys and values in the Maps
-     */
-    public DropHandler() {
-        rawDropMap.put("Sheep", ConfigItems.rawMutton);
-        rawDropMap.put("Horse", ConfigItems.rawHorse);
-        rawDropMap.put("Squid", ConfigItems.rawCalamari);
-        rawDropMap.put("Wolf", ConfigItems.rawWolf);
-        cookedDropMap.put("Sheep", ConfigItems.cookedMutton);
-        cookedDropMap.put("Horse", ConfigItems.cookedHorse);
-        cookedDropMap.put("Squid", ConfigItems.cookedCalamari);
-        cookedDropMap.put("Wolf", ConfigItems.cookedWolf);
-    }
 
     /**
      * Method triggered when a mob is killed and will be dropping items
@@ -44,8 +28,8 @@ public class DropHandler {
     private ItemStack getDrops(Entity entity) {
         String entityName = entity.getClass().getSimpleName().substring(6); // EntitySheep -> Sheep
         Item itemDropped = entity.isBurning()
-                ? cookedDropMap.get(entityName)
-                : rawDropMap.get(entityName);
+                ? ConfigItems.getCookedItem(entityName)
+                : ConfigItems.getRawItem(entityName);
         return new ItemStack(itemDropped, totalDrops);
     }
 

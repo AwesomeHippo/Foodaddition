@@ -1,26 +1,27 @@
-package com.awesomehippo.foodaddition;
+package foodaddition;
 
-import com.awesomehippo.foodaddition.config.Config;
-import com.awesomehippo.foodaddition.config.ConfigItems;
-import com.awesomehippo.foodaddition.integrations.ThaumcraftCompat;
+import foodaddition.config.Config;
+import foodaddition.config.ConfigItems;
+import foodaddition.model.integrations.ThaumcraftCompat;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import foodaddition.config.ConfigRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = "sheepfood", name = "Food Addition", version = "1.6", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = "foodaddition", name = "Food Addition", version = "1.6", acceptedMinecraftVersions = "[1.7.10]")
 public class FoodAddition {
 
-    public static final Logger log = LogManager.getLogger("sheepfood");
+    public static final String modID = "foodaddition";
+    public static final Logger log = LogManager.getLogger(modID);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        // Exception handler for config loading
         try {
             Config.init(event.getSuggestedConfigurationFile());
         } catch (Exception e) {
@@ -28,17 +29,22 @@ public class FoodAddition {
         } finally {
             if (Config.config != null) Config.save();
         }
-
-        ConfigItems.init();
+        try {
+            ConfigItems.init();
+        } catch (InstantiationException | IllegalAccessException e) {
+            FoodAddition.log.fatal(FoodAddition.modID, "A fatal error occured in the definition of items.");
+        }
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new DropHandler());
+        ConfigRecipes.init();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        if (Loader.isModLoaded("Thaumcraft")) new ThaumcraftCompat();
+        // Mod is loaded AND config setting is true -> load integration
+        if (Loader.isModLoaded("Thaumcraft") && Config.thaumcraftIntegrationEnabled) ThaumcraftCompat.init();
     }
 }

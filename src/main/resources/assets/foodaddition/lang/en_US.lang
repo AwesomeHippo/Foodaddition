@@ -1,8 +1,8 @@
-item.foodaddition.rawMutton.name=Raw Mutton
-item.foodaddition.cookedMutton.name=Cooked Mutton
-item.foodaddition.rawHorse.name=Raw Horse Meat
-item.foodaddition.cookedHorse.name=Cooked Horse Meat
-item.foodaddition.rawCalamari.name=Raw Calamari
-item.foodaddition.cookedCalamari.name=Cooked Calamari
-item.foodaddition.rawWolf.name=Raw Wolf Meat
-item.foodaddition.cookedWolf.name=Wolf Steak
+item.foodaddition.RawMutton.name=Raw Mutton
+item.foodaddition.CookedMutton.name=Cooked Mutton
+item.foodaddition.RawHorse.name=Raw Horse Meat
+item.foodaddition.CookedHorse.name=Cooked Horse Meat
+item.foodaddition.RawCalamari.name=Raw Calamari
+item.foodaddition.CookedCalamari.name=Cooked Calamari
+item.foodaddition.RawWolf.name=Raw Wolf Meat
+item.foodaddition.CookedWolf.name=Wolf Steak
