@@ -14,7 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = "foodaddition", name = "Food Addition", version = "1.6", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = "foodaddition", name = "Food Addition", version = "2.0", acceptedMinecraftVersions = "[1.7.10]")
 public class FoodAddition {
 
     public static final String modID = "foodaddition";

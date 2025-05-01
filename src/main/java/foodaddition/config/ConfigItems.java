@@ -12,11 +12,13 @@ public class ConfigItems {
 
     private static final HashMap<String, Item> rawItems = new HashMap<>(4), cookedItems = new HashMap<>(4);
     private static final ArrayList<Class<? extends FoodAdditionItem>> classes = new ArrayList<>(4);
+    public static final ArrayList<String> entities = new ArrayList<>(4);
 
     public static void init() throws InstantiationException, IllegalAccessException {
         registerClass(Sheep.class, Horse.class, Squid.class, Wolf.class);
         // For each class : make a new instance, then store entity name as key + Item as value
         for (Class<?> clazz : classes) {
+            entities.add(clazz.getSimpleName());
             FoodAdditionItem i = (FoodAdditionItem) clazz.newInstance();
             rawItems.put(i.getEntityName(), i.getItemRaw());
             cookedItems.put(i.getEntityName(), i.getItemCooked());
