@@ -1,8 +1,10 @@
-package foodaddition.api;
+package foodaddition.api.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import foodaddition.config.Config;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
+import net.minecraft.potion.Potion;
 
 public abstract class FoodAdditionItem {
     private static final String editedModID = "foodaddition", rawID = "Raw", cookedID = "Cooked";
@@ -25,9 +27,13 @@ public abstract class FoodAdditionItem {
         init();
     }
 
-    private void init() {
+    public void init() {
         if (isItemEnabled()) {
-            itemRaw = new ItemFood(hunger, saturation, canBeFeedToWolf())
+            this.itemRaw = new ItemFood(hunger, saturation, canBeFeedToWolf())
+                    .setPotionEffect(Potion.confusion.id, 15, 1, isRawEffectsEnabled())
+                    // ToDo The method only allows for one potion-effect per item ... Gonna fire event
+                    //.setPotionEffect(Potion.moveSlowdown.id, 15, 1, isRawEffectsEnabled())
+                    //.setPotionEffect(Potion.weakness.id, 30, 1, isRawEffectsEnabled())
                     .setUnlocalizedName(getUnlocalizedName(rawID))
                     .setTextureName(getTextureName(rawID));
             GameRegistry.registerItem(itemRaw, itemRaw.getUnlocalizedName().substring(5));
@@ -47,6 +53,12 @@ public abstract class FoodAdditionItem {
 
     public boolean canBeFeedToWolf() {
         return true;
+    }
+    public float isRawEffectsEnabled() {
+        return Config.rawEffectsEnabled ? 1.0F : 0.0F;
+    }
+    public float isCookedEffectsEnabled() {
+        return Config.cookedEffectsEnabled ? 1.0F : 0.0F;
     }
     public abstract boolean isItemEnabled();
 

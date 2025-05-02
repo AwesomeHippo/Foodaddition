@@ -24,7 +24,7 @@ compileJava {
     targetCompatibility = '1.8'
 }
 
-version = "2.0"
+version = "2.1"
 group= "com.awesomehippo.sheepfood" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "[1.7.10] Food Addition"
 

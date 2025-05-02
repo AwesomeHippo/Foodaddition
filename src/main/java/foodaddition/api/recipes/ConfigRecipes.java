@@ -1,6 +1,6 @@
-package foodaddition.config;
+package foodaddition.api.recipes;
 
-import foodaddition.model.recipes.FurnaceRecipes;
+import foodaddition.api.recipes.furnace.FurnaceRecipes;
 
 public class ConfigRecipes {
 

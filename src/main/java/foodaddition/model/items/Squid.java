@@ -1,7 +1,7 @@
 package foodaddition.model.items;
 
 import foodaddition.config.Config;
-import foodaddition.api.FoodAdditionItem;
+import foodaddition.api.items.FoodAdditionItem;
 
 public class Squid extends FoodAdditionItem {
 

@@ -1,7 +1,8 @@
 package foodaddition;
 
+import foodaddition.api.items.drops.DropHandler;
 import foodaddition.config.Config;
-import foodaddition.config.ConfigItems;
+import foodaddition.api.config.ConfigItems;
 import foodaddition.model.integrations.ThaumcraftCompat;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -9,16 +10,18 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import foodaddition.config.ConfigRecipes;
+import foodaddition.api.recipes.ConfigRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = "foodaddition", name = "Food Addition", version = "2.0", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = "foodaddition", name = "Food Addition", version = "2.1", acceptedMinecraftVersions = "[1.7.10]")
 public class FoodAddition {
 
     public static final String modID = "foodaddition";
     public static final Logger log = LogManager.getLogger(modID);
+
+    private final DropHandler dropHandler = new DropHandler();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -38,7 +41,9 @@ public class FoodAddition {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new DropHandler());
+        // Drops from mobs
+        MinecraftForge.EVENT_BUS.register(dropHandler);
+        // Mod recipes (Furnace)
         ConfigRecipes.init();
     }
 

@@ -1,7 +1,7 @@
-package foodaddition;
+package foodaddition.api.items.drops;
 
-import foodaddition.config.ConfigItems;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import foodaddition.api.config.ConfigItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
