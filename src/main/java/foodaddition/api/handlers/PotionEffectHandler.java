@@ -1,4 +1,4 @@
-package foodaddition.api.items.effects;
+package foodaddition.api.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;

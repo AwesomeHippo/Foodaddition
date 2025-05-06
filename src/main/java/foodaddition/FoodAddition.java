@@ -1,6 +1,6 @@
 package foodaddition;
 
-import foodaddition.api.items.drops.DropHandler;
+import foodaddition.api.handlers.DropHandler;
 import foodaddition.config.Config;
 import foodaddition.api.config.ConfigItems;
 import foodaddition.model.integrations.ThaumcraftCompat;
