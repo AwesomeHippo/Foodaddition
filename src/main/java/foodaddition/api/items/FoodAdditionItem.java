@@ -1,11 +1,10 @@
 package foodaddition.api.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import foodaddition.config.Config;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
-import net.minecraft.potion.Potion;
 
+@SuppressWarnings("ALL")
 public abstract class FoodAdditionItem {
     private static final String editedModID = "foodaddition", rawID = "Raw", cookedID = "Cooked";
     private static final int hunger = 2;
@@ -15,9 +14,7 @@ public abstract class FoodAdditionItem {
     private Item itemRaw, itemCooked;
 
     /**
-     * Constructor for the item API.
-     * All you need to do for the children class is to register it to ConfigItems, and it will do all the work.
-     * The texture files need to be named "RawX" and "CookedX", X being the Class's simple. The method getItemName() can be Override if needed.
+     * Constructor for the modded food items
      * @param hungerCooked Hunger points restored by the food when eaten
      * @param saturationCooked Saturation restored by the food when eaten
      */
@@ -30,14 +27,10 @@ public abstract class FoodAdditionItem {
     public void init() {
         if (isItemEnabled()) {
             this.itemRaw = new ItemFood(hunger, saturation, canBeFeedToWolf())
-                    .setPotionEffect(Potion.confusion.id, 15, 1, isRawEffectsEnabled())
-                    // ToDo The method only allows for one potion-effect per item ... Gonna fire event
-                    //.setPotionEffect(Potion.moveSlowdown.id, 15, 1, isRawEffectsEnabled())
-                    //.setPotionEffect(Potion.weakness.id, 30, 1, isRawEffectsEnabled())
                     .setUnlocalizedName(getUnlocalizedName(rawID))
                     .setTextureName(getTextureName(rawID));
             GameRegistry.registerItem(itemRaw, itemRaw.getUnlocalizedName().substring(5));
-            itemCooked = new ItemFood(hungerCooked, saturationCooked, canBeFeedToWolf())
+            this.itemCooked = new ItemFood(hungerCooked, saturationCooked, canBeFeedToWolf())
                     .setUnlocalizedName(getUnlocalizedName(cookedID))
                     .setTextureName(getTextureName(cookedID));
             GameRegistry.registerItem(itemCooked, itemCooked.getUnlocalizedName().substring(5));
@@ -53,12 +46,6 @@ public abstract class FoodAdditionItem {
 
     public boolean canBeFeedToWolf() {
         return true;
-    }
-    public float isRawEffectsEnabled() {
-        return Config.rawEffectsEnabled ? 1.0F : 0.0F;
-    }
-    public float isCookedEffectsEnabled() {
-        return Config.cookedEffectsEnabled ? 1.0F : 0.0F;
     }
     public abstract boolean isItemEnabled();
 

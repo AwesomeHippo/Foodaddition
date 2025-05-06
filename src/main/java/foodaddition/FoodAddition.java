@@ -32,11 +32,8 @@ public class FoodAddition {
         } finally {
             if (Config.config != null) Config.save();
         }
-        try {
-            ConfigItems.init();
-        } catch (InstantiationException | IllegalAccessException e) {
-            FoodAddition.log.fatal(FoodAddition.modID, "A fatal error occured in the definition of items.");
-        }
+
+        ConfigItems.init();
     }
 
     @EventHandler

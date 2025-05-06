@@ -10,27 +10,42 @@ import java.util.HashMap;
 
 public class ConfigItems {
 
-    private static final HashMap<String, Item> rawItems = new HashMap<>(4), cookedItems = new HashMap<>(4);
-    private static final ArrayList<Class<? extends FoodAdditionItem>> classes = new ArrayList<>(4);
-    public static final ArrayList<String> entitiesThatDrop = new ArrayList<>(4);
+    private static final ArrayList<FoodAdditionItem> instances = new ArrayList<>(4);
+    private static final HashMap<String, Item> rawItems, cookedItems;
+    public static final ArrayList<String> entitiesThatDrop;
 
-    public static void init() throws InstantiationException, IllegalAccessException {
-        registerClass(Sheep.class, Horse.class, Squid.class, Wolf.class);
-        // For each class : make a new instance, then store entity name as key + Item as value
-        for (Class<?> clazz : classes) {
-            entitiesThatDrop.add(clazz.getSimpleName());
-            FoodAdditionItem i = (FoodAdditionItem) clazz.newInstance();
-            rawItems.put(i.getEntityName(), i.getItemRaw());
-            cookedItems.put(i.getEntityName(), i.getItemCooked());
+    static {
+        registerFoodAdditionItem(new Horse(), new Sheep(), new Squid(), new Wolf());
+        int length = instances.size();
+        rawItems = new HashMap<>(length);
+        cookedItems = new HashMap<>(length);
+        entitiesThatDrop = new ArrayList<>(length);
+    }
+
+    public static void init() {
+        // For instance : store entity name as key + Item as value
+        clearCollections();
+        for (FoodAdditionItem instance : instances) {
+                entitiesThatDrop.add(instance.getEntityName());
+            if (instance.isItemEnabled()) {
+                rawItems.put(instance.getEntityName(), instance.getItemRaw());
+                cookedItems.put(instance.getEntityName(), instance.getItemCooked());
+            }
         }
+    }
+
+    private static void clearCollections() {
+        rawItems.clear();
+        cookedItems.clear();
+        entitiesThatDrop.clear();
     }
 
     /**
      * Method used to register new Food Addition Item classes.
+     * Don't forget to launch init() once you're done registering.
      */
-    @SafeVarargs
-    public static void registerClass(Class<? extends FoodAdditionItem> ... classes) {
-        ConfigItems.classes.addAll(Arrays.asList(classes));
+    public static void registerFoodAdditionItem(FoodAdditionItem ... instances) {
+        ConfigItems.instances.addAll(Arrays.asList(instances));
     }
 
     /**

@@ -8,7 +8,7 @@ public class Config {
 
     public static Configuration config;
     public static boolean sheepFoodEnabled, squidFoodEnabled, horseFoodEnabled, wolfFoodEnabled;
-    public static boolean rawEffectsEnabled, cookedEffectsEnabled;
+    public static boolean potionEffectsEnabled;
     public static boolean thaumcraftIntegrationEnabled;
 
     public static void init(File file) {
@@ -24,9 +24,8 @@ public class Config {
         squidFoodEnabled = config.get(itemsCat, "Squid", true).getBoolean(true);
         horseFoodEnabled = config.get(itemsCat, "Horse", true).getBoolean(true);
         wolfFoodEnabled = config.get(itemsCat, "Wolf", true).getBoolean(true);
-        config.addCustomCategoryComment(expertCat, "The Expert Mode set bad effects (nausea, weakness ...) to the player on eating raw meats ; and good effects on specific cooked meats.");
-        rawEffectsEnabled = config.get(expertCat, "Raw meat (Bad Effects)", false).getBoolean(false);
-        cookedEffectsEnabled = config.get(expertCat, "Cooked meat (Good Effects)", true).getBoolean(true);
+        config.addCustomCategoryComment(expertCat, "The Expert Mode set potion effects on the player after eating specific food");
+        potionEffectsEnabled = config.get(expertCat, "Potion Effects", false).getBoolean(false);
         thaumcraftIntegrationEnabled = config.get("Mod Integration Enabled", "Thaumcraft", true).getBoolean(true);
     }
 
