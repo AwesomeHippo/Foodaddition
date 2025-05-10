@@ -47,6 +47,6 @@ public class ThaumcraftCompat {
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
-        FoodAddition.log.info(FoodAddition.modID,"Food Addition : Thaumcraft Integration loaded !");
+        FoodAddition.log.info(FoodAddition.modID,"[Food Addition] Thaumcraft Integration loaded !");
     }
 }

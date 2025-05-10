@@ -1,6 +1,7 @@
 package foodaddition;
 
 import foodaddition.api.handlers.DropHandler;
+import foodaddition.api.handlers.PotionEffectHandler;
 import foodaddition.config.Config;
 import foodaddition.api.config.ConfigItems;
 import foodaddition.model.integrations.ThaumcraftCompat;
@@ -33,6 +34,8 @@ public class FoodAddition {
             if (Config.config != null) Config.save();
         }
 
+        // should be in preInit for the getModConfigDirectory
+        MinecraftForge.EVENT_BUS.register(new PotionEffectHandler(event.getModConfigurationDirectory()));
         ConfigItems.init();
     }
 
