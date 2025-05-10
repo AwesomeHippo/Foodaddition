@@ -11,6 +11,12 @@ import java.util.List;
 
 public class RefreshFoodEffects extends CommandBase {
 
+    private final PotionEffectHandler potionEffectHandler;
+
+    public RefreshFoodEffects() {
+        this.potionEffectHandler = new PotionEffectHandler(getConfigDir());
+    }
+
     @Override
     public String getCommandName() {
         return "foodaddition";
@@ -25,7 +31,7 @@ public class RefreshFoodEffects extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) {
         if (args.length == 1 && "refresh".equalsIgnoreCase(args[0])) {
             try {
-                PotionEffectHandler.reload(getConfigDir());
+                potionEffectHandler.reload(getConfigDir());
                 sender.addChatMessage(new ChatComponentText("§a[Food Addition] Potion effects config reloaded"));
             } catch (Exception e) {
                 sender.addChatMessage(new ChatComponentText("§c[Food Addition] Failed to reload config: " + e.getMessage()));
