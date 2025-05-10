@@ -43,7 +43,7 @@ public class PotionEffectHandler {
         }
     }
 
-    private void loadConfig(File file) {
+    private static void loadConfig(File file) {
         try {
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
@@ -86,7 +86,7 @@ public class PotionEffectHandler {
 
     public static void reload(File configDir) {
         effectMap.clear();
-        new PotionEffectHandler(configDir); // could just reload the file?..
+        loadConfig(new File(new File(configDir, "foodaddition"), "potion_effects.json"));
     }
 
     public void addPotionEffectToPlayer(EntityPlayer player, List<PotionEffect> effects) {
