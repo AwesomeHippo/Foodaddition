@@ -1,7 +1,9 @@
 package foodaddition;
 
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import foodaddition.api.handlers.DropHandler;
 import foodaddition.api.handlers.PotionEffectHandler;
+import foodaddition.commands.RefreshFoodEffects;
 import foodaddition.config.Config;
 import foodaddition.api.config.ConfigItems;
 import foodaddition.model.integrations.ThaumcraftCompat;
@@ -16,6 +18,8 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+
 @Mod(modid = "foodaddition", name = "Food Addition", version = "2.1", acceptedMinecraftVersions = "[1.7.10]")
 public class FoodAddition {
 
@@ -27,7 +31,9 @@ public class FoodAddition {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         try {
-            Config.init(event.getSuggestedConfigurationFile());
+            File configDir = new File(event.getModConfigurationDirectory(), "foodaddition");
+            configDir.mkdirs();
+            Config.init(new File(configDir, "foodaddition.cfg"));
         } catch (Exception e) {
             log.error("Food Addition has a problem loading it's config");
         } finally {
@@ -52,4 +58,11 @@ public class FoodAddition {
         // Mod is loaded AND config setting is true -> load integration
         if (Loader.isModLoaded("Thaumcraft") && Config.thaumcraftIntegrationEnabled) ThaumcraftCompat.init();
     }
+
+    // Register the refresh command
+    @Mod.EventHandler
+    public void onServerStarting(FMLServerStartingEvent event) {
+        event.registerServerCommand(new RefreshFoodEffects());
+    }
+
 }

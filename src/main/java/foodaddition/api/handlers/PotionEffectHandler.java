@@ -5,27 +5,27 @@ import foodaddition.api.config.EffectEntry;
 import foodaddition.api.config.FoodEffectEntry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
-import net.minecraft.item.ItemFood;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
 import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
 
 public class PotionEffectHandler {
 
     // hashmap
-    private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
+    public static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
 
     public PotionEffectHandler(File configDir) {
-        //TODO: we could also put both configs files in a custom dir like HLC
-        loadConfig(new File(configDir, "foodaddition_potion_effects.json"));
+        File configDirectory = new File(configDir, "foodaddition");
+        loadConfig(new File(configDirectory, "potion_effects.json"));
     }
 
     @SubscribeEvent
@@ -35,8 +35,8 @@ public class PotionEffectHandler {
         ItemStack eatenStack = event.item;
         String registryName = Item.itemRegistry.getNameForObject(eatenStack.getItem());
         int meta = eatenStack.getItemDamage();
-
         String key = registryName.concat("@").concat(String.valueOf(meta));
+
         List<PotionEffect> effects = effectMap.get(key);
         if (effects != null) {
             addPotionEffectToPlayer(event.entityPlayer, effects);
@@ -61,8 +61,7 @@ public class PotionEffectHandler {
                         "]"
                 );
                 java.nio.file.Files.write(file.toPath(), defaultJson.getBytes("UTF-8"));
-
-                System.out.println("[Food Addition] created default foodaddition_potion_effects.json at: " + file.getAbsolutePath());
+                System.out.println("[Food Addition] created default potion_effects.json at: " + file.getAbsolutePath());
             }
 
             Gson gson = new Gson();
@@ -83,6 +82,11 @@ public class PotionEffectHandler {
         } catch (Exception e) {
             System.err.println("[Food Addition] failed to load potion effects config: " + e.getMessage());
         }
+    }
+
+    public static void reload(File configDir) {
+        effectMap.clear();
+        new PotionEffectHandler(configDir); // could just reload the file?..
     }
 
     public void addPotionEffectToPlayer(EntityPlayer player, List<PotionEffect> effects) {
