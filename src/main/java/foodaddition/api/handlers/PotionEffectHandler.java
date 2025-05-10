@@ -21,7 +21,7 @@ import java.util.*;
 public class PotionEffectHandler {
 
     // hashmap
-    public static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
+    private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
 
     public PotionEffectHandler(File configDir) {
         File configDirectory = new File(configDir, "foodaddition");
