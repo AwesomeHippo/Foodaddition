@@ -46,9 +46,11 @@ public class PotionEffectHandler {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void loadConfig(File file) {
         try {
-            if (!file.getParentFile().mkdirs()) {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
 
                 // default config for apple -> regen II for 20 seconds lol - TODO: change?
                 // TODO: just initialize it as empty?

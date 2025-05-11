@@ -23,6 +23,7 @@ public class ConfigItems {
     }
 
     public static void init() {
+
         // For instance : store entity name as key + Item as value
         clearCollections();
         for (FoodAdditionItem instance : instances) {

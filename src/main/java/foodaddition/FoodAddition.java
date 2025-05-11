@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = "foodaddition", name = "Food Addition", version = "2.1", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = FoodAddition.modID, name = "Food Addition", version = "2.1", acceptedMinecraftVersions = "[1.7.10]")
 public class FoodAddition {
 
     public static final String modID = "foodaddition";
@@ -29,12 +29,13 @@ public class FoodAddition {
     private final DropHandler dropHandler = new DropHandler();
     public static PotionEffectHandler effectHandler;
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         try {
             File configDir = new File(event.getModConfigurationDirectory(), "foodaddition");
-            if (configDir.mkdirs())
-                Config.init(new File(configDir, "foodaddition.cfg"));
+            configDir.mkdirs();
+            Config.init(new File(configDir, "foodaddition.cfg"));
         } catch (Exception e) {
             log.error("Food Addition has a problem loading it's config");
         } finally {
