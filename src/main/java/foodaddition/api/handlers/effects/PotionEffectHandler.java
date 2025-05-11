@@ -14,8 +14,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 
 public class PotionEffectHandler {
@@ -27,6 +29,7 @@ public class PotionEffectHandler {
     public static final File effectJson = new File(FoodAddition.configDir, "potion_effects.json");
 
     public PotionEffectHandler() {
+        doJsonExists();
         loadConfig();
     }
 
@@ -44,23 +47,9 @@ public class PotionEffectHandler {
 
     private void loadConfig() {
         try {
-            if (!effectJson.exists()) {
-                // default config for apple -> regen II for 20 seconds lol
-                String defaultJson = "[\n".concat(
-                        "  {\n").concat(
-                        "    \"item\": \"minecraft:apple\",\n").concat(
-                        "    \"meta\": 0,\n").concat(
-                        "    \"effects\": [\n").concat(
-                        "      { \"id\": 10, \"duration\": 20, \"amplifier\": 1 }\n").concat(
-                        "    ]\n").concat(
-                        "  }\n").concat(
-                        "]"
-                );
-                java.nio.file.Files.write(effectJson.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
-                System.out.println("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
-            }
             FileReader reader = new FileReader(effectJson);
             List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
+            //FoodAddition.logConsole(entries.toString());
             for (FoodEffectEntry entry : entries) {
                 String key = entry.item.concat("@").concat(String.valueOf(entry.meta));
                 List<PotionEffect> potionEffects = new ArrayList<>();
@@ -76,5 +65,26 @@ public class PotionEffectHandler {
     public void reload() {
         effectMap.clear();
         this.loadConfig();
+    }
+
+    public void doJsonExists() {
+        if (!effectJson.exists()) {
+            // default config for apple -> regen II for 20 seconds lol
+            String defaultJson = "[\n".concat(
+                    "  {\n").concat(
+                    "    \"item\": \"minecraft:apple\",\n").concat(
+                    "    \"meta\": 0,\n").concat(
+                    "    \"effects\": [\n").concat(
+                    "      { \"id\": 10, \"duration\": 20, \"amplifier\": 1 }\n").concat(
+                    "    ]\n").concat(
+                    "  }\n").concat(
+                    "]" );
+            try {
+                Files.write(effectJson.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+            System.out.println("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
+        }
     }
 }
