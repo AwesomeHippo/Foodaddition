@@ -45,17 +45,17 @@ public class FoodAddition {
 
         // Registering items
         ConfigItems.init();
-        // Should be in preInit for the getModConfigDirectory
-        if (Config.potionEffectsEnabled)
-            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler());
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        // Drops from mobs
-        MinecraftForge.EVENT_BUS.register(dropHandler);
         // Mod recipes (Furnace)
         ConfigRecipes.init();
+        // Drops from mobs
+        MinecraftForge.EVENT_BUS.register(dropHandler);
+        // Potion Effects upon eating food
+        if (Config.potionEffectsEnabled)
+            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler());
     }
 
     @EventHandler
