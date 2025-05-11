@@ -1,6 +1,7 @@
 package foodaddition.api.handlers.effects;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import foodaddition.FoodAddition;
 import foodaddition.api.handlers.effects.types.EffectEntry;
 import foodaddition.api.handlers.effects.types.FoodEffectEntry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,9 +24,10 @@ public class PotionEffectHandler {
 
     // hashmap
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
+    private final Gson gson = new Gson();
 
     public PotionEffectHandler(File configDir) {
-        File configDirectory = new File(configDir, "foodaddition");
+        File configDirectory = new File(configDir, FoodAddition.modID);
         loadConfig(new File(configDirectory, "potion_effects.json"));
     }
 
@@ -64,7 +66,6 @@ public class PotionEffectHandler {
                 System.out.println("[Food Addition] created default potion_effects.json at: " + file.getAbsolutePath());
             }
 
-            Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<FoodEffectEntry>>() {}.getType();
             try (FileReader reader = new FileReader(file)) {
                 List<FoodEffectEntry> entries = gson.fromJson(reader, listType);

@@ -41,11 +41,11 @@ public class FoodAddition {
             if (Config.config != null) Config.save();
         }
 
+        // Registering items
+        ConfigItems.init();
         // Should be in preInit for the getModConfigDirectory
         if (Config.potionEffectsEnabled)
             MinecraftForge.EVENT_BUS.register(new PotionEffectHandler(event.getModConfigurationDirectory()));
-        // Registering items
-        ConfigItems.init();
     }
 
     @EventHandler
