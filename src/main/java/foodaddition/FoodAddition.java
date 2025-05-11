@@ -25,7 +25,7 @@ import java.io.File;
 public class FoodAddition {
 
     public static final String modID = "foodaddition";
-    public static final Logger log = LogManager.getLogger(modID);
+    public static final Logger logger = LogManager.getLogger(modID);
     public static File configDir;
 
     private static final DropHandler dropHandler = new DropHandler();
@@ -39,7 +39,7 @@ public class FoodAddition {
             configDir.mkdirs();
             Config.init(new File(configDir, "foodaddition.cfg"));
         } catch (Exception e) {
-            log.error("Food Addition has a problem loading it's config");
+            logger.error("Food Addition has a problem loading it's config");
         } finally {
             if (Config.config != null) Config.save();
         }
@@ -71,8 +71,8 @@ public class FoodAddition {
         event.registerServerCommand(new RefreshFoodEffects());
     }
 
-    public static void logConsole(String message) {
-        FoodAddition.log.log(Level.INFO, message);
+    public static void log(String message) {
+        FoodAddition.logger.log(Level.INFO, message);
     }
 
 }
