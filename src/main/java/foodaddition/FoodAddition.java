@@ -15,6 +15,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import foodaddition.api.recipes.ConfigRecipes;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,6 +69,10 @@ public class FoodAddition {
     @Mod.EventHandler
     public void onServerStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new RefreshFoodEffects());
+    }
+
+    public static void logConsole(String message) {
+        FoodAddition.log.log(Level.INFO, message);
     }
 
 }
