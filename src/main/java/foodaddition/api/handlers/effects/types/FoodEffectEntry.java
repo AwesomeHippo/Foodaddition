@@ -1,4 +1,4 @@
-package foodaddition.api.config;
+package foodaddition.api.handlers.effects.types;
 
 import java.util.List;
 

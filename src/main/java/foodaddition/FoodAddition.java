@@ -1,8 +1,8 @@
 package foodaddition;
 
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import foodaddition.api.handlers.DropHandler;
-import foodaddition.api.handlers.PotionEffectHandler;
+import foodaddition.api.handlers.drops.DropHandler;
+import foodaddition.api.handlers.effects.PotionEffectHandler;
 import foodaddition.api.handlers.commands.RefreshFoodEffects;
 import foodaddition.config.Config;
 import foodaddition.api.config.ConfigItems;

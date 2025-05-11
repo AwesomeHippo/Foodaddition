@@ -1,4 +1,4 @@
-package foodaddition.api.handlers;
+package foodaddition.api.handlers.drops;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import foodaddition.api.config.ConfigItems;

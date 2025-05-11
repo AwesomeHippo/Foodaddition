@@ -1,8 +1,8 @@
-package foodaddition.api.handlers;
+package foodaddition.api.handlers.effects;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import foodaddition.api.config.EffectEntry;
-import foodaddition.api.config.FoodEffectEntry;
+import foodaddition.api.handlers.effects.types.EffectEntry;
+import foodaddition.api.handlers.effects.types.FoodEffectEntry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class PotionEffectHandler {
@@ -45,8 +46,7 @@ public class PotionEffectHandler {
 
     private void loadConfig(File file) {
         try {
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
+            if (!file.getParentFile().mkdirs()) {
 
                 // default config for apple -> regen II for 20 seconds lol - TODO: change?
                 // TODO: just initialize it as empty?
@@ -60,7 +60,7 @@ public class PotionEffectHandler {
                         "  }\n").concat(
                         "]"
                 );
-                java.nio.file.Files.write(file.toPath(), defaultJson.getBytes("UTF-8"));
+                java.nio.file.Files.write(file.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
                 System.out.println("[Food Addition] created default potion_effects.json at: " + file.getAbsolutePath());
             }
 
