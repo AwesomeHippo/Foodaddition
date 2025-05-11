@@ -26,9 +26,8 @@ public class PotionEffectHandler {
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
     private final Gson gson = new Gson();
 
-    public PotionEffectHandler(File configDir) {
-        File configDirectory = new File(configDir, FoodAddition.modID);
-        loadConfig(new File(configDirectory, "potion_effects.json"));
+    public PotionEffectHandler() {
+        loadConfig(new File(FoodAddition.configDir, "potion_effects.json"));
     }
 
     @SubscribeEvent
@@ -70,6 +69,7 @@ public class PotionEffectHandler {
 
             Type listType = new TypeToken<ArrayList<FoodEffectEntry>>() {}.getType();
             try (FileReader reader = new FileReader(file)) {
+
                 List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
                 if (entries != null) {
                     for (FoodEffectEntry entry : entries) {
