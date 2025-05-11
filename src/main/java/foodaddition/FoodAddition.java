@@ -20,11 +20,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = FoodAddition.modID, name = "Food Addition", version = "2.1", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(modid = FoodAddition.modID, useMetadata = true)
 public class FoodAddition {
 
     public static final String modID = "foodaddition";
     public static final Logger log = LogManager.getLogger(modID);
+    public static File configDir;
 
     private final DropHandler dropHandler = new DropHandler();
     public static PotionEffectHandler effectHandler;
@@ -33,7 +34,7 @@ public class FoodAddition {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         try {
-            File configDir = new File(event.getModConfigurationDirectory(), "foodaddition");
+            configDir = new File(event.getModConfigurationDirectory(), modID);
             configDir.mkdirs();
             Config.init(new File(configDir, "foodaddition.cfg"));
         } catch (Exception e) {
@@ -46,7 +47,7 @@ public class FoodAddition {
         ConfigItems.init();
         // Should be in preInit for the getModConfigDirectory
         if (Config.potionEffectsEnabled)
-            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler(event.getModConfigurationDirectory()));
+            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler());
     }
 
     @EventHandler
