@@ -25,9 +25,10 @@ public class PotionEffectHandler {
     // hashmap
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
     private final Gson gson = new Gson();
+    public static final File effectJson = new File(FoodAddition.configDir, "potion_effects.json");
 
     public PotionEffectHandler() {
-        loadConfig(new File(FoodAddition.configDir, "potion_effects.json"));
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -40,18 +41,14 @@ public class PotionEffectHandler {
         String key = registryName.concat("@").concat(String.valueOf(meta));
 
         List<PotionEffect> effects = effectMap.get(key);
-        if (effects != null) {
+        if (effects != null)
             addPotionEffectToPlayer(event.entityPlayer, effects);
-        }
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void loadConfig(File file) {
+    private void loadConfig() {
         try {
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-
-                // default config for apple -> regen II for 20 seconds lol - TODO: change?
+            if (!effectJson.exists()) {
+                // default config for apple -> regen II for 20 seconds lol
                 // TODO: just initialize it as empty?
                 String defaultJson = "[\n".concat(
                         "  {\n").concat(
@@ -63,21 +60,19 @@ public class PotionEffectHandler {
                         "  }\n").concat(
                         "]"
                 );
-                java.nio.file.Files.write(file.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
-                System.out.println("[Food Addition] created default potion_effects.json at: " + file.getAbsolutePath());
+                java.nio.file.Files.write(effectJson.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
+                System.out.println("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
             }
 
             Type listType = new TypeToken<ArrayList<FoodEffectEntry>>() {}.getType();
-            try (FileReader reader = new FileReader(file)) {
-
+            try (FileReader reader = new FileReader(effectJson)) {
                 List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
                 if (entries != null) {
                     for (FoodEffectEntry entry : entries) {
                         String key = entry.item.concat("@").concat(String.valueOf(entry.meta));
                         List<PotionEffect> potionEffects = new ArrayList<>();
-                        for (EffectEntry effect : entry.effects) {
+                        for (EffectEntry effect : entry.effects)
                             potionEffects.add(new PotionEffect(effect.id, effect.duration * 20, effect.amplifier));
-                        }
                         effectMap.put(key, potionEffects);
                     }
                 }
@@ -87,9 +82,9 @@ public class PotionEffectHandler {
         }
     }
 
-    public void reload(File configDir) {
+    public void reload() {
         effectMap.clear();
-        this.loadConfig(new File(new File(configDir, "foodaddition"), "potion_effects.json"));
+        this.loadConfig();
     }
 
     public void addPotionEffectToPlayer(EntityPlayer player, List<PotionEffect> effects) {

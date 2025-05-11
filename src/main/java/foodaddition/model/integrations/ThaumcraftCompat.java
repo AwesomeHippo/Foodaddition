@@ -4,6 +4,7 @@ import foodaddition.FoodAddition;
 import foodaddition.model.items.*;
 import foodaddition.api.config.ConfigItems;
 import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Level;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -47,6 +48,6 @@ public class ThaumcraftCompat {
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
-        FoodAddition.log.info(FoodAddition.modID,"[Food Addition] Thaumcraft Integration loaded !");
+        FoodAddition.log.log(Level.INFO, "[Food Addition] Thaumcraft Integration loaded !");
     }
 }
