@@ -24,7 +24,7 @@ public class PotionEffectHandler {
 
     // hashmap
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>();
-    private final Gson gson = new Gson();
+    private static final Gson gson = new Gson();
     public static final File effectJson = new File(FoodAddition.configDir, "potion_effects.json");
 
     public PotionEffectHandler() {
@@ -64,6 +64,7 @@ public class PotionEffectHandler {
                 System.out.println("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
             }
 
+            // ToDo - Optimize
             Type listType = new TypeToken<ArrayList<FoodEffectEntry>>() {}.getType();
             try (FileReader reader = new FileReader(effectJson)) {
                 List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
@@ -78,7 +79,7 @@ public class PotionEffectHandler {
                 }
             }
         } catch (Exception e) {
-            System.err.println("[Food Addition] failed to load potion effects config: " + e.getMessage());
+            System.err.println(FoodAddition.modID.concat(" - Failed to load potion effects config : " + e.getMessage()));
         }
     }
 

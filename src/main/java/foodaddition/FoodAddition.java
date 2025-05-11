@@ -27,8 +27,8 @@ public class FoodAddition {
     public static final Logger log = LogManager.getLogger(modID);
     public static File configDir;
 
-    private final DropHandler dropHandler = new DropHandler();
-    public static PotionEffectHandler effectHandler;
+    private static final DropHandler dropHandler = new DropHandler();
+    public static final PotionEffectHandler effectHandler = new PotionEffectHandler();
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @EventHandler
@@ -42,7 +42,6 @@ public class FoodAddition {
         } finally {
             if (Config.config != null) Config.save();
         }
-
         // Registering items
         ConfigItems.init();
     }
@@ -55,7 +54,7 @@ public class FoodAddition {
         MinecraftForge.EVENT_BUS.register(dropHandler);
         // Potion Effects upon eating food
         if (Config.potionEffectsEnabled)
-            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler());
+            MinecraftForge.EVENT_BUS.register(effectHandler);
     }
 
     @EventHandler
