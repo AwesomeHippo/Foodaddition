@@ -1,6 +1,6 @@
 package foodaddition.commands;
 
-import foodaddition.api.handlers.PotionEffectHandler;
+import foodaddition.FoodAddition;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -11,15 +11,9 @@ import java.util.List;
 
 public class RefreshFoodEffects extends CommandBase {
 
-    private final PotionEffectHandler potionEffectHandler;
-
-    public RefreshFoodEffects() {
-        this.potionEffectHandler = new PotionEffectHandler(getConfigDir());
-    }
-
     @Override
     public String getCommandName() {
-        return "foodaddition";
+        return FoodAddition.modID;
     }
 
     @Override
@@ -29,20 +23,19 @@ public class RefreshFoodEffects extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
-        if (args.length == 1 && "refresh".equalsIgnoreCase(args[0])) {
+        if (args.length == 1 && "refresh".equalsIgnoreCase(args[0]))
             try {
-                potionEffectHandler.reload(getConfigDir());
+                FoodAddition.effectHandler.reload(getConfigDir());
                 sender.addChatMessage(new ChatComponentText("§a[Food Addition] Potion effects config reloaded"));
             } catch (Exception e) {
                 sender.addChatMessage(new ChatComponentText("§c[Food Addition] Failed to reload config: " + e.getMessage()));
             }
-        } else {
+        else
             throw new WrongUsageException(getCommandUsage(sender));
-        }
     }
 
     private File getConfigDir() {
-        return new File("config/foodaddition");
+        return new File("config/".concat(FoodAddition.modID));
     }
 
     @Override
@@ -50,11 +43,11 @@ public class RefreshFoodEffects extends CommandBase {
         return 3;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List addTabCompletionOptions(ICommandSender sender, String[] args) {
-        if (args.length == 1) {
+        if (args.length == 1)
             return getListOfStringsMatchingLastWord(args, "refresh");
-        }
         return null;
     }
 }

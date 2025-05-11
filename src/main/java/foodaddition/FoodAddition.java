@@ -27,21 +27,24 @@ public class FoodAddition {
     public static final Logger log = LogManager.getLogger(modID);
 
     private final DropHandler dropHandler = new DropHandler();
+    public static PotionEffectHandler effectHandler;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         try {
             File configDir = new File(event.getModConfigurationDirectory(), "foodaddition");
-            configDir.mkdirs();
-            Config.init(new File(configDir, "foodaddition.cfg"));
+            if (configDir.mkdirs())
+                Config.init(new File(configDir, "foodaddition.cfg"));
         } catch (Exception e) {
             log.error("Food Addition has a problem loading it's config");
         } finally {
             if (Config.config != null) Config.save();
         }
 
-        // should be in preInit for the getModConfigDirectory
-        MinecraftForge.EVENT_BUS.register(new PotionEffectHandler(event.getModConfigurationDirectory()));
+        // Should be in preInit for the getModConfigDirectory
+        if (Config.potionEffectsEnabled)
+            MinecraftForge.EVENT_BUS.register(new PotionEffectHandler(event.getModConfigurationDirectory()));
+        // Registering items
         ConfigItems.init();
     }
 
@@ -56,7 +59,8 @@ public class FoodAddition {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         // Mod is loaded AND config setting is true -> load integration
-        if (Loader.isModLoaded("Thaumcraft") && Config.thaumcraftIntegrationEnabled) ThaumcraftCompat.init();
+        if (Loader.isModLoaded("Thaumcraft") && Config.thaumcraftIntegrationEnabled)
+            ThaumcraftCompat.init();
     }
 
     // Register the refresh command
