@@ -1,4 +1,4 @@
-package foodaddition.commands;
+package foodaddition.api.handlers.commands;
 
 import foodaddition.FoodAddition;
 import net.minecraft.command.CommandBase;

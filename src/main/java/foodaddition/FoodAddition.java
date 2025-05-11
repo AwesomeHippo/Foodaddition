@@ -3,7 +3,7 @@ package foodaddition;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import foodaddition.api.handlers.DropHandler;
 import foodaddition.api.handlers.PotionEffectHandler;
-import foodaddition.commands.RefreshFoodEffects;
+import foodaddition.api.handlers.commands.RefreshFoodEffects;
 import foodaddition.config.Config;
 import foodaddition.api.config.ConfigItems;
 import foodaddition.model.integrations.ThaumcraftCompat;
