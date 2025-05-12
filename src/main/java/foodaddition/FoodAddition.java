@@ -73,7 +73,7 @@ public class FoodAddition {
     }
 
     public static void log(String message) {
-        FoodAddition.logger.log(Level.INFO, message);
+        FoodAddition.logger.log(Level.INFO, modID.concat(" : ").concat(message));
     }
 
 }
