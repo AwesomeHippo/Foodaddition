@@ -28,8 +28,7 @@ public class FoodAddition {
     public static final Logger logger = LogManager.getLogger(modID);
     public static File configDir;
 
-    private static final DropHandler dropHandler = new DropHandler();
-    public static final PotionEffectHandler effectHandler = new PotionEffectHandler();
+    public static PotionEffectHandler effectHandler;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @EventHandler
@@ -37,7 +36,7 @@ public class FoodAddition {
         try {
             configDir = new File(event.getModConfigurationDirectory(), modID);
             configDir.mkdirs();
-            Config.init(new File(configDir, "foodaddition.cfg"));
+            Config.init(new File(configDir, modID.concat(".cfg")));
         } catch (Exception e) {
             logger.error("Food Addition has a problem loading it's config");
         } finally {
@@ -52,10 +51,12 @@ public class FoodAddition {
         // Mod recipes (Furnace)
         ConfigRecipes.init();
         // Drops from mobs
-        MinecraftForge.EVENT_BUS.register(dropHandler);
+        MinecraftForge.EVENT_BUS.register(new DropHandler());
         // Potion Effects upon eating food
-        if (Config.potionEffectsEnabled)
+        if (Config.potionEffectsEnabled) {
+            effectHandler = new PotionEffectHandler();
             MinecraftForge.EVENT_BUS.register(effectHandler);
+        }
     }
 
     @EventHandler

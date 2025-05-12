@@ -1,5 +1,6 @@
 package foodaddition.api.handlers.effects;
 
+import com.google.gson.reflect.TypeToken;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import foodaddition.FoodAddition;
 import foodaddition.api.handlers.effects.types.EffectEntry;
@@ -10,7 +11,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileReader;
@@ -22,7 +22,6 @@ import java.util.*;
 
 public class PotionEffectHandler {
 
-    // hashmap
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>(20);
     private static final Gson gson = new Gson();
     private static final Type listType = new TypeToken<ArrayList<FoodEffectEntry>>() {}.getType();
@@ -49,7 +48,6 @@ public class PotionEffectHandler {
         try {
             FileReader reader = new FileReader(effectJson);
             List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
-            //FoodAddition.logConsole(entries.toString());
             for (FoodEffectEntry entry : entries) {
                 String key = entry.item.concat("@").concat(String.valueOf(entry.meta));
                 List<PotionEffect> potionEffects = new ArrayList<>();
@@ -81,10 +79,10 @@ public class PotionEffectHandler {
                     "]" );
             try {
                 Files.write(effectJson.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
+                FoodAddition.log("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-            System.out.println("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
         }
     }
 }
