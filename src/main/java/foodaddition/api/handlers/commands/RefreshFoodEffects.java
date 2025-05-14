@@ -17,7 +17,7 @@ public class RefreshFoodEffects extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/foodaddition refresh";
+        return "/".concat(FoodAddition.modID).concat("refresh");
     }
 
     @Override
@@ -26,8 +26,10 @@ public class RefreshFoodEffects extends CommandBase {
             try {
                 FoodAddition.effectHandler.reload();
                 sender.addChatMessage(new ChatComponentText("§a[Food Addition] Potion effects config reloaded"));
+            } catch (NullPointerException e) {
+                sender.addChatMessage(new ChatComponentText("§c[Food Addition] Failed to reload json file: The config might be disabled !"));
             } catch (Exception e) {
-                sender.addChatMessage(new ChatComponentText("§c[Food Addition] Failed to reload config: " + e.getMessage()));
+                sender.addChatMessage(new ChatComponentText("§c[Food Addition] Failed to reload json file: " + e.getMessage()));
             }
         else
             throw new WrongUsageException(getCommandUsage(sender));
