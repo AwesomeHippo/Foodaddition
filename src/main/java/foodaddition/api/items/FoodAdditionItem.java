@@ -65,7 +65,7 @@ public abstract class FoodAdditionItem {
      * Returns the Item's unlocalized name, depending on child class name and raw/cooked state
      */
     public String getUnlocalizedName(String id) {
-        return editedModID.concat(".").concat(id).concat(getItemName());
+        return id.concat(getItemName());
     }
     /**
      * Returns the Item's texture name, depending on child class name and raw/cooked state

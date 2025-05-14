@@ -1,8 +1,8 @@
-item.foodaddition.RawMutton.name=Mouton cru
-item.foodaddition.CookedMutton.name=Mouton cuit
-item.foodaddition.RawHorse.name=Viande de cheval crue
-item.foodaddition.CookedHorse.name=Viande de cheval cuite
-item.foodaddition.RawCalamari.name=Calamar cru
-item.foodaddition.CookedCalamari.name=Calamar cuit
-item.foodaddition.RawWolf.name=Viande de loup crue
-item.foodaddition.CookedWolf.name=Steak de loup
+item.RawMutton.name=Mouton cru
+item.CookedMutton.name=Mouton cuit
+item.RawHorse.name=Viande de cheval crue
+item.CookedHorse.name=Viande de cheval cuite
+item.RawCalamari.name=Calamar cru
+item.CookedCalamari.name=Calamar cuit
+item.RawWolf.name=Viande de loup crue
+item.CookedWolf.name=Steak de loup
