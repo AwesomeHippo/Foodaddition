@@ -50,10 +50,10 @@ public class PotionEffectHandler {
             FileReader reader = new FileReader(effectJson);
             List<FoodEffectEntry> entries = gson.fromJson(reader, listType);
             for (FoodEffectEntry entry : entries) {
-                String key = entry.item.concat("@").concat(String.valueOf(entry.meta));
+                String key = entry.getItem().concat("@").concat(String.valueOf(entry.getMeta()));
                 List<PotionEffect> potionEffects = new ArrayList<>();
-                for (EffectEntry effect : entry.effects)
-                    potionEffects.add(new PotionEffect(effect.id, effect.duration * 20, effect.amplifier));
+                for (EffectEntry effect : entry)
+                    potionEffects.add(new PotionEffect(effect.getId(), effect.getDuration(), effect.getAmplifier()));
                 effectMap.put(key, potionEffects);
             }
         } catch (Exception e) {
