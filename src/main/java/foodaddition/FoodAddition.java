@@ -51,7 +51,8 @@ public class FoodAddition {
         // Mod recipes (Furnace)
         ConfigRecipes.init();
         // Drops from mobs
-        MinecraftForge.EVENT_BUS.register(new DropHandler());
+        if (Config.customMobDropsEnabled)
+            MinecraftForge.EVENT_BUS.register(new DropHandler());
         // Potion Effects upon eating food
         if (Config.potionEffectsEnabled) {
             effectHandler = new PotionEffectHandler();

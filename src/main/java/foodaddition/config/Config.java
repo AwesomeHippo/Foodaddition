@@ -8,7 +8,7 @@ public class Config {
 
     public static Configuration config;
     public static boolean sheepFoodEnabled, squidFoodEnabled, horseFoodEnabled, wolfFoodEnabled;
-    public static boolean potionEffectsEnabled;
+    public static boolean customMobDropsEnabled, potionEffectsEnabled;
     public static boolean thaumcraftIntegrationEnabled;
 
     public static void init(File file) {
@@ -25,6 +25,7 @@ public class Config {
         horseFoodEnabled = config.get(itemsCat, "Horse", true).getBoolean(true);
         wolfFoodEnabled = config.get(itemsCat, "Wolf", true).getBoolean(true);
         config.addCustomCategoryComment(modOptions, "Here you can turn on/off mechanics added my the mod");
+        customMobDropsEnabled = config.get(modOptions, "Custom Drops", true).getBoolean(true);
         potionEffectsEnabled = config.get(modOptions, "Potion Effects", false).getBoolean(false);
         config.addCustomCategoryComment(integs, "Here you can tweak which integrations you want running or not.");
         thaumcraftIntegrationEnabled = config.get(integs, "Thaumcraft", true).getBoolean(true);
