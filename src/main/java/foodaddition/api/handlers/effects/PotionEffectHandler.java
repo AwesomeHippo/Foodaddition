@@ -20,6 +20,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 
+import static foodaddition.FoodAddition.log;
+
 public class PotionEffectHandler {
 
     private static final Map<String, List<PotionEffect>> effectMap = new HashMap<>(20);
@@ -35,13 +37,12 @@ public class PotionEffectHandler {
     @SubscribeEvent
     public void onFoodEaten(PlayerUseItemEvent.Finish event) {
         if (!(event.item.getItem() instanceof ItemFood)) return;
-
         String registryName = Item.itemRegistry.getNameForObject(event.item.getItem());
         String key = registryName.concat("@").concat(String.valueOf(event.item.getItemDamage())); // mod:item_name @ metadata
         List<PotionEffect> effects = effectMap.get(key);
         if (effects != null)
             for (PotionEffect effect : effects)
-                event.entityPlayer.addPotionEffect(effect);
+                event.entityPlayer.addPotionEffect(new PotionEffect(effect));
     }
 
     private void loadConfig() {
@@ -79,7 +80,7 @@ public class PotionEffectHandler {
                     "]" );
             try {
                 Files.write(effectJson.toPath(), defaultJson.getBytes(StandardCharsets.UTF_8));
-                FoodAddition.log("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
+                log("[Food Addition] created default potion_effects.json at: " + effectJson.getAbsolutePath());
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
