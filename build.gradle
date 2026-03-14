@@ -20,7 +20,7 @@ compileJava {
     targetCompatibility = '1.8'
 }
 
-version = "2.1"
+version = "2.2.0.1"
 group = "com.awesomehippo.sheepfood" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "[1.7.10] Food Addition"
 
@@ -28,7 +28,7 @@ archivesBaseName = "[1.7.10] Food Addition"
 def domain = 'com.awesomehippo.sheepfood' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 def modid = 'modid'
 def mcversion = '1.7.10'
-version = '2.2'
+version = '2.2.0.1'
 /* A.B.C.D
     A = Major version
     B = Adding content or researches/recipes
