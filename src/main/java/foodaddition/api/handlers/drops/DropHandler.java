@@ -26,11 +26,14 @@ public class DropHandler {
      * Returns the type of item dropped and it's count, depending on the entity
      */
     private ItemStack getDrops(Entity entity) {
-        String entityName = entity.getClass().getSimpleName().substring(6); // EntitySheep -> Sheep
-        Item itemDropped = entity.isBurning()
-                ? ConfigItems.getCookedItem(entityName)
-                : ConfigItems.getRawItem(entityName);
-        return new ItemStack(itemDropped, totalDrops);
+        String entityName = entity.getClass().getSimpleName();
+        if (entityName.length() >= 6) {
+            entityName = entityName.substring(6); // EntitySheep -> Sheep
+            Item itemDropped = entity.isBurning()
+                  ? ConfigItems.getCookedItem(entityName)
+                  : ConfigItems.getRawItem(entityName);
+            return new ItemStack(itemDropped, totalDrops);
+        } else return new ItemStack((Item) null, 0);
     }
 
     /**
