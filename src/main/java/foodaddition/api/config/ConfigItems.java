@@ -1,7 +1,10 @@
 package foodaddition.api.config;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import foodaddition.api.items.FoodAdditionItem;
+import foodaddition.api.items.ItemFoodPlus;
 import foodaddition.model.items.*;
+import foodaddition.model.items.sub.BrownSugar;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -14,6 +17,8 @@ public class ConfigItems {
     private static final HashMap<String, Item> rawItems, cookedItems;
     public static final ArrayList<String> entitiesThatDrop;
 
+    public static ItemFoodPlus brownSugar;
+
     static {
         registerFoodAdditionItem(new Horse(), new Sheep(), new Squid(), new Wolf());
         int length = instances.size();
@@ -23,6 +28,8 @@ public class ConfigItems {
     }
 
     public static void init() {
+        brownSugar = new BrownSugar();
+        GameRegistry.registerItem(brownSugar, brownSugar.getUnlocalizedName());
 
         // For instance : store entity name as key + Item as value
         clearCollections();

@@ -3,6 +3,7 @@ package foodaddition.model.integrations;
 import foodaddition.FoodAddition;
 import foodaddition.model.items.*;
 import foodaddition.api.config.ConfigItems;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -11,42 +12,49 @@ import thaumcraft.api.aspects.AspectList;
 public class ThaumcraftCompat {
 
     public static void init() {
+        // Brown Sugar
+        setAspects(ConfigItems.brownSugar, new AspectList()
+                .add(Aspect.HUNGER, 1));
         // Sheep
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getRawItem(Sheep.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getRawItem(Sheep.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 1));
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getCookedItem(Sheep.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getCookedItem(Sheep.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 4)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
         // Squid
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getRawItem(Squid.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getRawItem(Squid.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 2)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.WATER, 1));
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getCookedItem(Squid.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getCookedItem(Squid.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 2)
                 .add(Aspect.CRAFT, 1));
         // Horse
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getRawItem(Horse.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getRawItem(Horse.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 1));
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getCookedItem(Horse.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getCookedItem(Horse.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 4)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
         // Wolf
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getRawItem(Wolf.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getRawItem(Wolf.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 2));
-        ThaumcraftApi.registerObjectTag(new ItemStack(ConfigItems.getCookedItem(Wolf.class.getSimpleName())), new AspectList()
+        setAspects(ConfigItems.getCookedItem(Wolf.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
         FoodAddition.log("[Food Addition] Thaumcraft Integration loaded !");
+    }
+    
+    protected static void setAspects(Item item, AspectList aspects) {
+        ThaumcraftApi.registerObjectTag(new ItemStack(item), aspects);
     }
 }
