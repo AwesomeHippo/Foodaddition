@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 public class ConfigTweaks {
 
     public static void init() {
-        addWheatToGrassDrops();
+        if (Config.wheatDropFromGrass) addWheatToGrassDrops();
     }
 
     protected static void addWheatToGrassDrops() {
