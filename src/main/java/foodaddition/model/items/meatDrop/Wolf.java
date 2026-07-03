@@ -1,4 +1,4 @@
-package foodaddition.model.items;
+package foodaddition.model.items.meatDrop;
 
 import foodaddition.config.Config;
 import foodaddition.api.items.FoodAdditionItem;

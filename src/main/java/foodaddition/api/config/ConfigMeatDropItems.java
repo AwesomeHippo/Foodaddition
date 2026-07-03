@@ -1,23 +1,21 @@
 package foodaddition.api.config;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import foodaddition.api.items.FoodAdditionItem;
-import foodaddition.api.items.ItemFoodPlus;
-import foodaddition.model.items.*;
-import foodaddition.model.items.sub.BrownSugar;
+import foodaddition.model.items.meatDrop.Horse;
+import foodaddition.model.items.meatDrop.Sheep;
+import foodaddition.model.items.meatDrop.Squid;
+import foodaddition.model.items.meatDrop.Wolf;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class ConfigItems {
+public class ConfigMeatDropItems {
 
     private static final ArrayList<FoodAdditionItem> instances = new ArrayList<>(4);
     private static final HashMap<String, Item> rawItems, cookedItems;
     public static final ArrayList<String> entitiesThatDrop;
-
-    public static ItemFoodPlus brownSugar;
 
     static {
         registerFoodAdditionItem(new Horse(), new Sheep(), new Squid(), new Wolf());
@@ -28,9 +26,6 @@ public class ConfigItems {
     }
 
     public static void init() {
-        brownSugar = new BrownSugar();
-        GameRegistry.registerItem(brownSugar, brownSugar.getUnlocalizedName());
-
         // For instance : store entity name as key + Item as value
         clearCollections();
         for (FoodAdditionItem instance : instances) {
@@ -53,7 +48,7 @@ public class ConfigItems {
      * Don't forget to launch init() once you're done registering.
      */
     public static void registerFoodAdditionItem(FoodAdditionItem ... instances) {
-        ConfigItems.instances.addAll(Arrays.asList(instances));
+        ConfigMeatDropItems.instances.addAll(Arrays.asList(instances));
     }
 
     /**

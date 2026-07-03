@@ -1,8 +1,12 @@
 package foodaddition.model.integrations;
 
 import foodaddition.FoodAddition;
-import foodaddition.model.items.*;
-import foodaddition.api.config.ConfigItems;
+import foodaddition.model.config.ConfigItems;
+import foodaddition.api.config.ConfigMeatDropItems;
+import foodaddition.model.items.meatDrop.Horse;
+import foodaddition.model.items.meatDrop.Sheep;
+import foodaddition.model.items.meatDrop.Squid;
+import foodaddition.model.items.meatDrop.Wolf;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
@@ -16,38 +20,38 @@ public class ThaumcraftCompat {
         setAspects(ConfigItems.brownSugar, new AspectList()
                 .add(Aspect.HUNGER, 1));
         // Sheep
-        setAspects(ConfigItems.getRawItem(Sheep.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getRawItem(Sheep.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 1));
-        setAspects(ConfigItems.getCookedItem(Sheep.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getCookedItem(Sheep.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 4)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
         // Squid
-        setAspects(ConfigItems.getRawItem(Squid.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getRawItem(Squid.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 2)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.WATER, 1));
-        setAspects(ConfigItems.getCookedItem(Squid.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getCookedItem(Squid.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 2)
                 .add(Aspect.CRAFT, 1));
         // Horse
-        setAspects(ConfigItems.getRawItem(Horse.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getRawItem(Horse.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 1));
-        setAspects(ConfigItems.getCookedItem(Horse.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getCookedItem(Horse.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 4)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));
         // Wolf
-        setAspects(ConfigItems.getRawItem(Wolf.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getRawItem(Wolf.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.LIFE, 1)
                 .add(Aspect.BEAST, 2));
-        setAspects(ConfigItems.getCookedItem(Wolf.class.getSimpleName()), new AspectList()
+        setAspects(ConfigMeatDropItems.getCookedItem(Wolf.class.getSimpleName()), new AspectList()
                 .add(Aspect.FLESH, 3)
                 .add(Aspect.HUNGER, 3)
                 .add(Aspect.CRAFT, 1));

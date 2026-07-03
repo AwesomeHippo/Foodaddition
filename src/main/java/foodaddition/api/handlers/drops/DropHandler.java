@@ -1,7 +1,7 @@
 package foodaddition.api.handlers.drops;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import foodaddition.api.config.ConfigItems;
+import foodaddition.api.config.ConfigMeatDropItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,8 +30,8 @@ public class DropHandler {
         if (entityName.length() >= 6) {
             entityName = entityName.substring(6); // EntitySheep -> Sheep
             Item itemDropped = entity.isBurning()
-                  ? ConfigItems.getCookedItem(entityName)
-                  : ConfigItems.getRawItem(entityName);
+                  ? ConfigMeatDropItems.getCookedItem(entityName)
+                  : ConfigMeatDropItems.getRawItem(entityName);
             return new ItemStack(itemDropped, totalDrops);
         } else return new ItemStack((Item) null, 0);
     }

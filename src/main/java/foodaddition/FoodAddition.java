@@ -5,7 +5,7 @@ import foodaddition.api.handlers.drops.DropHandler;
 import foodaddition.api.handlers.effects.PotionEffectHandler;
 import foodaddition.api.handlers.commands.RefreshFoodEffects;
 import foodaddition.config.Config;
-import foodaddition.api.config.ConfigItems;
+import foodaddition.api.config.ConfigMeatDropItems;
 import foodaddition.model.config.ConfigTweaks;
 import foodaddition.model.integrations.ThaumcraftCompat;
 import cpw.mods.fml.common.Loader;
@@ -44,7 +44,7 @@ public class FoodAddition {
             if (Config.config != null) Config.save();
         }
         // Registering items
-        ConfigItems.init();
+        ConfigMeatDropItems.init();
         // Adding new grass drops
         ConfigTweaks.init();
     }
