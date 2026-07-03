@@ -3,6 +3,7 @@ package foodaddition.model.config;
 import cpw.mods.fml.common.registry.GameRegistry;
 import foodaddition.api.config.ConfigMeatDropItems;
 import foodaddition.api.items.ItemFoodPlus;
+import foodaddition.config.Config;
 import foodaddition.model.items.BrownSugar;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,7 @@ public class ConfigItems {
 
     public static void init() {
         ConfigMeatDropItems.init();
-         initBrownSugar();
+        if (Config.brownSugarEnabled) initBrownSugar();
     }
 
     protected static void initBrownSugar() {
@@ -35,7 +36,6 @@ public class ConfigItems {
             }
         if (sugarRecipe == null) throw new RuntimeException("Recipe for sugar not found, report to author");
         else CraftingManager.getInstance().getRecipeList().remove(sugarRecipe);}
-
         // Adding recipe for reed -> brown sugar
         GameRegistry.addShapelessRecipe(new ItemStack(brownSugar), new ItemStack(Items.reeds));
         // Adding recipe for brown sugar -> sugar

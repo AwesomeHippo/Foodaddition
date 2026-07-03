@@ -7,13 +7,13 @@ import java.io.File;
 public class Config {
 
     public static Configuration config;
-    public static boolean sheepFoodEnabled, squidFoodEnabled, horseFoodEnabled, wolfFoodEnabled;
+    public static boolean brownSugarEnabled, sheepFoodEnabled, squidFoodEnabled, horseFoodEnabled, wolfFoodEnabled;
     public static boolean customMobDropsEnabled, potionEffectsEnabled, wheatDropFromGrass;
     public static boolean thaumcraftIntegrationEnabled;
     public static int wheatDropWeight;
 
     public static void init(File file) {
-        config = new Configuration(file, "1.1");
+        config = new Configuration(file, "1.2");
         config.load();
         loadConfig();
     }
@@ -21,6 +21,7 @@ public class Config {
     private static void loadConfig() {
         String itemsCat = "Items", modOptions = "Mod-Options", grassDrops = "Grass-Drops", integs = "Integrations";
         config.addCustomCategoryComment(itemsCat, "Here you can disable/enable back food items. Change value to false to disable the food linked to the animal.");
+        brownSugarEnabled = config.get(itemsCat, "BrownSugar", true).getBoolean(true);
         sheepFoodEnabled = config.get(itemsCat, "Sheep", true).getBoolean(true);
         squidFoodEnabled = config.get(itemsCat, "Squid", true).getBoolean(true);
         horseFoodEnabled = config.get(itemsCat, "Horse", true).getBoolean(true);
