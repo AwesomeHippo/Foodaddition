@@ -29,16 +29,19 @@ public class ConfigItems {
         GameRegistry.registerItem(brownSugar, brownSugar.getUnlocalizedName());
 
         // Removing recipe for white sugar
-        // ToDo Boolean found to stop looping
         {
         ShapedRecipes sugarRecipe = null;
-        for (Object o : CraftingManager.getInstance().getRecipeList())
+        boolean found = false;
+        for (Object o : CraftingManager.getInstance().getRecipeList()) {
+            if (found) break;
             if (o instanceof ShapedRecipes) {
                 ShapedRecipes r = (ShapedRecipes) o;
-                if (r.getRecipeOutput() != null & r.getRecipeOutput().getItem() != null
-                        && r.getRecipeOutput().getItem().equals(Items.sugar) && r.getRecipeOutput().stackSize == 1 && r.recipeItems[0].getItem().equals(Items.reeds))
+                if (r.getRecipeOutput() != null & r.getRecipeOutput().getItem() != null && r.getRecipeOutput().getItem().equals(Items.sugar) && r.getRecipeOutput().stackSize == 1 && r.recipeItems[0].getItem().equals(Items.reeds)) {
                     sugarRecipe = r;
+                    found = true;
+                }
             }
+        }
         if (sugarRecipe == null) throw new RuntimeException("Recipe for sugar not found, report to author");
         else CraftingManager.getInstance().getRecipeList().remove(sugarRecipe);}
         // Adding recipe for reed -> brown sugar
