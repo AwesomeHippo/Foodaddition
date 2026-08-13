@@ -5,7 +5,9 @@ import foodaddition.api.config.ConfigMeatDropItems;
 import foodaddition.api.items.ItemFoodPlus;
 import foodaddition.config.Config;
 import foodaddition.model.items.BrownSugar;
+import foodaddition.model.items.GrilledFood;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -13,18 +15,21 @@ import net.minecraft.item.crafting.ShapedRecipes;
 public class ConfigItems {
 
     public static ItemFoodPlus brownSugar;
+    public static ItemFood grilledFood;
 
     public static void init() {
         ConfigMeatDropItems.init();
         if (Config.brownSugarEnabled) initBrownSugar();
+        if (Config.grilledFoodEnabled) initGrilledFood();
     }
 
-    protected static void initBrownSugar() {
+    private static void initBrownSugar() {
         // Registering item
         brownSugar = new BrownSugar();
         GameRegistry.registerItem(brownSugar, brownSugar.getUnlocalizedName());
 
         // Removing recipe for white sugar
+        // ToDo Boolean found to stop looping
         {
         ShapedRecipes sugarRecipe = null;
         for (Object o : CraftingManager.getInstance().getRecipeList())
@@ -40,5 +45,9 @@ public class ConfigItems {
         GameRegistry.addShapelessRecipe(new ItemStack(brownSugar), new ItemStack(Items.reeds));
         // Adding recipe for brown sugar -> sugar
         GameRegistry.addShapelessRecipe(new ItemStack(Items.sugar), new ItemStack(brownSugar));
+    }
+    private static void initGrilledFood() {
+        grilledFood = new GrilledFood();
+        GameRegistry.registerItem(grilledFood, GrilledFood.unlocalizedLocalName);
     }
 }
