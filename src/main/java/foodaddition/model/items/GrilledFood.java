@@ -18,7 +18,7 @@ public class GrilledFood extends ItemFood {
     private static final String[] names = {"grilled_beef", "grilled_pork", "grilled_chicken", "grilled_fish", "grilled_mutton", "grilled_horse", "grilled_squid", "grilled_wolf"};
     private static final int[] hunger = {4, 4, 3, 2, 5, 5, 2, 4};
     private static final float[] saturation = {0.875F, 0.875F, 0.6666F, 0.75F, 0.6F, 0.6F, 0.75F, 0.5F};
-    private static final int nbSubTypes = saturation.length;
+    public static final int nbSubTypes = saturation.length;
     public static final String unlocalizedLocalName = "grilledFood";
 
     @SideOnly(Side.CLIENT)

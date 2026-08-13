@@ -3,7 +3,7 @@ package foodaddition.api.handlers.effects.types;
 import java.util.Iterator;
 import java.util.List;
 
-@SuppressWarnings({"unused", "MismatchedQueryAndUpdateOfCollection"})
+@SuppressWarnings({"unused"})
 public class FoodEffectEntry implements Iterable<EffectEntry> {
     private String item;
     private int meta;
