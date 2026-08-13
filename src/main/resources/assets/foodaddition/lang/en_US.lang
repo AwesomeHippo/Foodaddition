@@ -7,3 +7,12 @@ item.CookedCalamari.name=Cooked Calamari
 item.RawWolf.name=Raw Wolf Meat
 item.CookedWolf.name=Wolf Steak
 item.brown_sugar.name=Brown Sugar
+
+item.grilledFood.grilled_beef.name=Beef Bites
+item.grilledFood.grilled_pork.name=Pork Ribs
+item.grilledFood.grilled_chicken.name=Chicken Skewers
+item.grilledFood.grilled_fish.name=Fish Fillet
+item.grilledFood.grilled_mutton.name=Sheep Chunks
+item.grilledFood.grilled_horse.name=Horse Tenderloin
+item.grilledFood.grilled_squid.name=Grilled Calamari
+item.grilledFood.grilled_wolf.name=Grilled Wolf
